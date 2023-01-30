@@ -1,0 +1,47 @@
+{
+	"manifest_version": 2,
+	"name": "Twitch Sentiment",
+	"description": "A browser extension to view twitch chat Sentiment",
+	"version": "0.0.1",
+
+		"page_action": {
+			"default_icon": "icon128.png"
+		}
+
+	,
+	"externally_connectable": {
+		"matches": ["*://*.twitch.tv/*"]
+	},
+	"background": {
+		"scripts": [
+			"background.js"
+		]
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://www.twitch.tv/*"],
+            "extension_pages": ["index.html"],
+			"js": ["content.js"],
+			"all_frames":true,
+			"runAt": "document_start"
+		}
+	],
+	"web_accessible_resources": [
+		"content.js",
+		"twitch.js"
+	],
+	"permissions": [
+		"*://*.twitch.tv/*",
+		"activeTab",
+		"storage",
+        "unlimitedStorage"
+	],
+	"host_permissions": [
+		"*://*.twitch.tv/*"
+	],
+	"icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	}
+}
