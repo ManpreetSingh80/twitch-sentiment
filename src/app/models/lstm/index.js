@@ -1,15 +1,24 @@
-import './tf.es2017.min.js';
+// import './tf.es2017.min.js';
+// const tf = window.tf;
+import * as tf from'@tensorflow/tfjs';
+
 import { OOV_INDEX, padSequences } from "./sequence_utils.js";
-const tf = window.tf;
+
 
 const HOSTED_URLS = {
-  model: "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json",
-  metadata: "models/lstm/metadata.json"
+  lstm: {
+    model: "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_lstm_v1/model.json",
+    metadata: "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_lstm_v1/metadata.json"
+  },
+  cnn: {
+    model: "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json",
+    metadata: "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json"
+  }
 };
 const modelPath = 'indexeddb://cnn-sa';
 const LOCAL_URLS = {
-  model: "models/lstm/model.json",
-  metadata: "models/lstm/metadata.json"
+  model: "public/models/lstm/model.json",
+  metadata: "public/models/lstm/metadata.json"
 };
 /**
  * Test whether a given URL is retrievable.
@@ -61,7 +70,8 @@ async function loadHostedMetadata(url) {
 class SentimentPredictor {
   async init(urls) {
     this.urls = urls;
-    this.model = await loadHostedPretrainedModel(urls.model);
+    // this.model = await loadHostedPretrainedModel(urls.model);
+    this.model = await tf.loadLayersModel(urls.model);
     await this.loadMetadata();
     return this;
   }
@@ -114,14 +124,14 @@ class SentimentPredictor {
  * function with the UI.
  */
 
-export async function setupSentiment() {
-//   if (await urlExists(LOCAL_URLS.model)) {
-//     const predictor = await  new SentimentPredictor().init(LOCAL_URLS);
-//     return predictor;
-//   }
+export async function setupSentiment(model = 'cnn') {
+  // if (await urlExists(LOCAL_URLS.model)) {
+  //   const predictor = await  new SentimentPredictor().init(LOCAL_URLS);
+  //   return predictor;
+  // }
 
-  if (await urlExists(HOSTED_URLS.model)) {
-    const predictor = await new SentimentPredictor().init(HOSTED_URLS);
+  if (await urlExists(HOSTED_URLS[model].model)) {
+    const predictor = await new SentimentPredictor().init(HOSTED_URLS[model]);
     return predictor;
   }
 

@@ -1,0 +1,35 @@
+.text-primary {
+    color: var(--bs-primary) !important;
+  }
+  
+  .nav-link {
+    color: var(--bs-primary) !important;
+    background-color: white !important;
+  }
+  
+  .btn-view {
+    float: right;
+  }
+  .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--bs-primary);
+  }
+  
+  .nav-pills {
+    color: var(--bs-primary) !important;
+    background-color: white !important;
+  }
+  
+  .nav-link.active {
+    background-color: var(--bs-primary) !important;
+    color: white !important;
+  }
+  
+  :root {
+    --bs-primary: #8a2be2 !important;
+  }
+  

@@ -10,6 +10,7 @@ module.exports = env => {
 			content: path.join(__dirname, 'src/app/content.js'),
 			background: path.join(__dirname, 'src/app/background.js'),
 			twitch: path.join(__dirname, 'src/app/twitch.js'),
+			// history: path.join(__dirname, 'src/history/history.js'),
 		},
 		output: { path: path.join(__dirname, env.DIST || 'dist'), filename: '[name].js' },
 		module: {
@@ -60,6 +61,7 @@ module.exports = env => {
 			new CopyPlugin({
 				patterns: [
 					{ from: 'public/icon', to: '.', },
+					{ from: 'src/history', to: '.', },
 					// { from: 'public/image', to: 'image/' },
 					{ from: 'public/models', to: 'models/' },
 					{

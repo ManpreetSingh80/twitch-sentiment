@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sentiment Analysis : Recorded sessions</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--
+      Need a visual blank slate?
+      Remove all code in `styles.css`!
+    -->
+    <script
+      src="bootstrap.min.js"
+    ></script>
+    <link
+      href="bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="chart.min.js"></script>
+    <link rel="stylesheet" href="history.css" />
+    <script type="module" src="history.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1 class="title m-3 text-primary">Twitch Sentiment history</h1>
+        </div>
+      </div>
+      <div class="container">
+        <div
+          id="page-loader"
+          class="d-flex justify-content-center spinners row"
+        >
+          <div class="spinner-border m-5" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div
+          style="visibility: hidden"
+          id="channels-list"
+          class="d-flex justify-content-around flex-wrap"
+        ></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<div
+  class="modal fade"
+  id="historyModalToggle"
+  aria-hidden="true"
+  aria-labelledby="historyModalToggleLabel"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="nav nav-pills card-header-tabs" id="nav-tab" role="tablist">
+          <button
+            class="nav-link active"
+            id="nav-live-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-live"
+            type="button"
+            role="tab"
+            aria-controls="nav-live"
+            aria-selected="true"
+          >
+            Live Brodcasts
+          </button>
+          <button
+            class="nav-link"
+            id="nav-videos-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-videos"
+            type="button"
+            role="tab"
+            aria-controls="nav-videos"
+            aria-selected="false"
+          >
+            Videos
+          </button>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" id="past-broadcasts-list">
+        <div class="tab-content" id="nav-tabContent">
+          <div
+            class="tab-pane fade show active"
+            id="nav-live"
+            role="tabpanel"
+            aria-labelledby="nav-live-tab"
+          ></div>
+          <div
+            class="tab-pane fade show"
+            id="nav-videos"
+            role="tabpanel"
+            aria-labelledby="nav-videos-tab"
+          ></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="chartModal"
+  aria-hidden="true"
+  aria-labelledby="historyModalToggleLabel2"
+  tabindex="-1"
+>
+<div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="historyModalToggleLabel2">
+          Sentiment graph
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div
+          id="chart-loader"
+          class="d-flex justify-content-center spinners row"
+        >
+          <div class="spinner-border m-5" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div style="display: none" id="chart-container">
+            <canvas id="chart"></canvas>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-primary"
+          data-bs-target="#historyModalToggle"
+          data-bs-toggle="modal"
+          data-bs-dismiss="modal"
+        >
+          Back to history
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="realtimeChartModal"
+  aria-hidden="true"
+  aria-labelledby="historyModalToggleLabel2"
+  tabindex="-1"
+>
+<div class="modal-dialog modal-xl modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="historyModalToggleLabel2">
+        Sentiment graph
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <div
+        id="realtime-chart-loader"
+        class="d-flex justify-content-center spinners row"
+      >
+        <div class="spinner-border m-5" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div style="display: none" id="realtime-chart-container"><div>
+        <canvas id="realtime-chart"></canvas>
+      </div</div>
+    </div>
+    <div class="modal-footer">
+      <button
+        class="btn btn-primary"
+        data-bs-dismiss="modal"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div>

@@ -5,7 +5,8 @@
 	"version": "0.0.1",
 
 		"page_action": {
-			"default_icon": "icon128.png"
+			"default_icon": "icon128.png",
+			"default_title": "Open Dashboard"
 		}
 
 	,
@@ -20,19 +21,18 @@
 	"content_scripts": [
 		{
 			"matches": ["https://www.twitch.tv/*"],
-            "extension_pages": ["index.html"],
 			"js": ["content.js"],
 			"all_frames":true,
 			"runAt": "document_start"
 		}
 	],
+	"options_page": "history.html",
 	"web_accessible_resources": [
 		"content.js",
 		"twitch.js"
 	],
 	"permissions": [
 		"*://*.twitch.tv/*",
-		"activeTab",
 		"storage",
         "unlimitedStorage"
 	],

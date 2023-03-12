@@ -12,9 +12,9 @@ const computeProbablitiy = (matrix) => matrix.reduce((a , c) => {
 
 function getSentiment({positive, neutral, negative}) {
     if (positive > neutral) {
-        return positive > negative ? '1' : '-1';
+        return positive > negative ? 1 : -1;
     } else {
-        return neutral > negative ? '0' : '-1';
+        return neutral > negative ? 0 : -1;
     }
 }
 

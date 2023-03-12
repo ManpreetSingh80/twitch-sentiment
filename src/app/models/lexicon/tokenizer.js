@@ -25,7 +25,7 @@ function tokenize(input, emotes = [], preserveCase = true) {
         const text = input.replace(regexes.URL, 'URL');
         const safeText =  text.replace(regexes.HANG_RE, '$1$1$1');
         // console.log(safeText);
-        const wordRegex = orRegex(regexes.EMOTICONS, regexes.HTML_TAGS, regexes.ASCII, regexes.HASHTAGS, regexes.WORDS_WOTH_APOSTROPHES, regexes.NUMBERS, regexes.WORDS_WITHOUT_APOSTROPHES, regexes.ELLIPSIS, regexes.NON_WHITESPACE)
+        const wordRegex = orRegex(regexes.EMOTICONS, regexes.EMOJIS, regexes.HTML_TAGS, regexes.ASCII, regexes.HASHTAGS, regexes.WORDS_WOTH_APOSTROPHES, regexes.NUMBERS, regexes.WORDS_WITHOUT_APOSTROPHES, regexes.ELLIPSIS, regexes.NON_WHITESPACE)
         // console.log(wordRegex);
 
         let words = [...safeText.matchAll(new RegExp(wordRegex, 'igm'))].map((match) => match[0]);
